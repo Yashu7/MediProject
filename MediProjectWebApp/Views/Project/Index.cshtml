@@ -1,0 +1,28 @@
+﻿@model MediProjectWebApp.Models.Project
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+
+
+<script>
+    window.onpopstate = function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("LogOut", "Login")'
+        })
+    };
+    function pushState() {
+        history.pushState(null, null, location.href);
+    }
+
+    window.onload = function () {
+        pushState();
+    };
+</script>
+

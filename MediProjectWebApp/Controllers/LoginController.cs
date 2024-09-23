@@ -16,8 +16,14 @@ namespace MediProjectWebApp.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            FormsAuthentication.SignOut();
             return View();
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            Session["User"] = null;
+            return RedirectToAction("Index", "Login");
         }
         [AllowAnonymous]
         [HttpPost]
@@ -26,13 +32,12 @@ namespace MediProjectWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var encryptedPassword = BlowfishHelper.EncryptBlowfish(model.Password, "12345678abcdefgmypassword");
                 IUserDaoService userDaoService = new UserDAOService();
                 var queryStatus = userDaoService.LoginUser(model);
                 if (queryStatus == QueryStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Username, false);
-                    return RedirectToAction("Index", "Login");
+                    Session["User"] = model.Username;
+                    return RedirectToAction("Index", "Project");
                 }
             }
 
