@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34301.259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediProjectWebApp", "MediProjectWebApp\MediProjectWebApp.csproj", "{1034D0D1-E094-4D7D-8D4E-29F2D01E164B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediProjectWebApp.Tests", "MediProjectWebApp.Tests\MediProjectWebApp.Tests.csproj", "{A3C3D5A7-D0B7-4F65-973F-1485A2F8FD8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1034D0D1-E094-4D7D-8D4E-29F2D01E164B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1034D0D1-E094-4D7D-8D4E-29F2D01E164B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1034D0D1-E094-4D7D-8D4E-29F2D01E164B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1034D0D1-E094-4D7D-8D4E-29F2D01E164B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C3D5A7-D0B7-4F65-973F-1485A2F8FD8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C3D5A7-D0B7-4F65-973F-1485A2F8FD8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C3D5A7-D0B7-4F65-973F-1485A2F8FD8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C3D5A7-D0B7-4F65-973F-1485A2F8FD8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EEF4B72-B2B9-4B8A-ABCD-318A0DB569D4}
+	EndGlobalSection
+EndGlobal
