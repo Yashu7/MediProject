@@ -1,8 +1,96 @@
 ﻿@model MediProjectWebApp.Models.Accounts.User
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 @{
     ViewBag.Title = "Index";
 }
+<div id="LoginDiv" class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card text-center card-div">
+        <h2>MediApp</h2>
+        <h3>Login to your account</h3>
+        <div class="card-body">
 
-<h2>Index</h2>
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group form-horizontal">
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-horizontal", @placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group form-horizontal">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-horizontal", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary custom-btn btn-block">Login</button>
+                </div>}
+        </div>
+    </div>
+</div>
+<style>
+    .card-div {
+        background-color: rgb(255 255 255 /.5);
+        border-radius: 25px;
+        padding-top: 10px;
+        margin-left: 300px;
+        margin-right: 300px;
+        min-width:400px;
+        padding-bottom: 25px;
+    }
+    input {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 10px;
+        font-size: 13px;
+        border: 1px solid rgba(0,0,0,0.3);
+        border-radius: 8px;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .custom-btn {
+        max-width: 200px;
+        width: 100%;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+        overflow: hidden;
+        animation: backgroundAnimation 10s ease infinite;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+
+    @@keyframes backgroundAnimation {
+        0% {
+            background: #4A90E2;
+        }
+
+        50% {
+            background: #A2DFF7;
+        }
+
+        100% {
+            background: #4A90E2;
+        }
+    }
+
+    html, body {
+        height: 100%;
+    }
+</style>
 
