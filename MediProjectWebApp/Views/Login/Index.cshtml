@@ -4,13 +4,46 @@
 @{
     ViewBag.Title = "Index";
 }
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            $.ajax({
+                                type: 'GET',
+                                url: '/Project/Index',
+                                cache: false,
+                                success: function (result) {
+                                     window.location.href = '@Url.Action("Index", "Project")';
+                                }
+                            });
+                        } else {
+                            $('#loginMessage').text(response.message).css('color', 'red');
+                        }
+                    },
+                    error: function () {
+                        $('#loginMessage').text("An error occurred while processing your request.").css('color', 'red');
+                    }
+                });
+            });
+        });
+    </script>
+}
 <div id="LoginDiv" class="d-flex justify-content-center align-items-center vh-100">
     <div class="card text-center card-div">
         <h2>MediApp</h2>
         <h3>Login to your account</h3>
+        <div id="loginMessage"></div>
         <div class="card-body">
 
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "loginForm", @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group form-horizontal">

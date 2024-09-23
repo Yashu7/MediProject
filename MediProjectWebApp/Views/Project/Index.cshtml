@@ -1,4 +1,4 @@
-﻿@model MediProjectWebApp.Models.Project
+﻿@model IEnumerable<MediProjectWebApp.Models.Project>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,19 @@
 
 
 
-
+<style>
+    html, body {
+        height: 100%;
+    }
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+        overflow: hidden;
+        background: #4A90E2;
+    }
+</style>
 <script>
     window.onpopstate = function (event) {
         $.ajax({

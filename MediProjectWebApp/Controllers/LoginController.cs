@@ -37,7 +37,7 @@ namespace MediProjectWebApp.Controllers
                 if (queryStatus == QueryStatus.Success)
                 {
                     Session["User"] = model.Username;
-                    return RedirectToAction("Index", "Project");
+                    return Json(new { success = true, message = "OK" });
                 }
             }
 
