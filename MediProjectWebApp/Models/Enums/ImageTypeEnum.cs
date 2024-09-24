@@ -7,6 +7,7 @@ namespace MediProjectWebApp.Models.Enums
 {
     public enum ImageTypeEnum
     {
+        None,
         JPG,
         DICOM
     }

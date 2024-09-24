@@ -8,7 +8,7 @@ namespace MediProjectWebApp.Models.Accounts
 {
     public class User
     {
-        public long Id { get; private set; }
+        public long Id { get; set; }
         [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; }
         [Required(ErrorMessage = "Password is required")]

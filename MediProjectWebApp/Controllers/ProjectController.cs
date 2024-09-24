@@ -22,7 +22,6 @@ namespace MediProjectWebApp.Controllers
             return View(userDaoService.ReadAllProjects());
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public JsonResult AddProject(Project project)
         {
             if (ModelState.IsValid)
@@ -32,7 +31,7 @@ namespace MediProjectWebApp.Controllers
 
                 return Json(project);
             }
-            return Json(null);
+            return Json(new { success = false, message = "Unable to save project." });
         }
     }
 }
