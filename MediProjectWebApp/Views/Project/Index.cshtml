@@ -55,11 +55,11 @@
                     </div>
                     <div class="form-group">
                         <label for="projectEnabled">Project Enabled</label>
-                        <input type="checkbox" id="projectEnabled" required />
+                        <input type="checkbox" id="projectEnabled" required checked />
                     </div>
                     <div class="form-group">
                         <label for="acceptNewVisits">Accept New Visits</label>
-                        <input type="checkbox" id="acceptNewVisits" required onchange="toggleSupportedImageType(); validateForm()">
+                        <input type="checkbox" id="acceptNewVisits" onchange="toggleSupportedImageType(); validateForm()">
                     </div>
                     <div class="form-group">
                         <label for="supportedImageType">Supported Image Type</label>
@@ -116,10 +116,11 @@
 <script>
     function toggleSupportedImageType() {
         const projectEnabled = document.getElementById('projectEnabled').checked;
+        const acceptNewVisits = document.getElementById('acceptNewVisits').checked;
         const supportedImageTypeSelect = document.getElementById('supportedImageType');
         const clearSelectionBtn = document.getElementById('clearSelectionBtn');
 
-        if (projectEnabled) {
+        if (projectEnabled && acceptNewVisits) {
             supportedImageTypeSelect.disabled = false;
             supportedImageTypeSelect.value = 'JPG';
             clearSelectionBtn.disabled = false;
@@ -132,21 +133,24 @@
         validateForm();
     }
 
-    function validateForm() {
-        const projectName = document.getElementById('projectName').value.trim();
-        const projectEnabled = document.getElementById('projectEnabled').checked;
-        const supportedImageTypeSelect = document.getElementById('supportedImageType');
-        const submitButton = document.getElementById('submitButton');
-
-        const isFormValid = projectName !== '' && projectEnabled && supportedImageTypeSelect.value !== 'None';
-        submitButton.disabled = !isFormValid;
-    }
-
     function clearSelection() {
         const supportedImageTypeSelect = document.getElementById('supportedImageType');
         supportedImageTypeSelect.value = 'None';
         validateForm();
     }
+
+    function validateForm() {
+        const projectName = document.getElementById('projectName').value.trim();
+        const projectEnabled = document.getElementById('projectEnabled').checked;
+        const submitButton = document.getElementById('submitButton');
+
+        const isFormValid = projectName !== '' && projectEnabled;
+        submitButton.disabled = !isFormValid;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        toggleSupportedImageType();
+    });
 
     $(document).ready(function () {
         $("#addProjectBtn").click(function () {

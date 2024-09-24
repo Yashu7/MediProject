@@ -2,6 +2,7 @@
 using MediProjectWebApp.Models;
 using MediProjectWebApp.Models.Enums;
 using MediProjectWebApp.Services.Interfaces;
+using Microsoft.Extensions.Logging;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace MediProjectWebApp.Services
 {
     public class ProjectDaoService : ConnectionStringHelper, IProjectDaoService
     {
+
         public QueryStatus CreateProject(Project project)
         {
             // SQL Insert Command
@@ -36,7 +38,9 @@ namespace MediProjectWebApp.Services
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: " + ex.Message);
+                        ILoggerFactory factory = new LoggerFactory();
+                        ILogger logger = factory.CreateLogger("Error");
+                        logger.LogError(ex.Message);
                     }
                 }
             }
@@ -53,25 +57,34 @@ namespace MediProjectWebApp.Services
             List<Project> projects = new List<Project>();
             using (var conn = new NpgsqlConnection(connString))
             {
-                conn.Open();
-
-                using (var cmd = new NpgsqlCommand("SELECT * FROM PROJECTS", conn))
+                try
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    conn.Open();
+
+                    using (var cmd = new NpgsqlCommand("SELECT * FROM PROJECTS", conn))
                     {
-                        while (reader.Read())
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            long id = Convert.ToInt64(reader["id"]);
-                            string name = (string)reader["project_name"];
-                            bool enabled = (bool)reader["project_enabled"];
-                            bool accept = (bool)reader["accept_new_visits"];
-                            string image = (string)reader["supported_image_type"];
-                            DateTime created = (DateTime)reader["created_at"];
-                            ImageTypeEnum imageEnum;
-                            Enum.TryParse<ImageTypeEnum>(image, out imageEnum);
-                            projects.Add(new Project(id, name, enabled, accept, imageEnum, created));
+                            while (reader.Read())
+                            {
+                                long id = Convert.ToInt64(reader["id"]);
+                                string name = (string)reader["project_name"];
+                                bool enabled = (bool)reader["project_enabled"];
+                                bool accept = (bool)reader["accept_new_visits"];
+                                string image = (string)reader["supported_image_type"];
+                                DateTime created = (DateTime)reader["created_at"];
+                                ImageTypeEnum imageEnum;
+                                Enum.TryParse<ImageTypeEnum>(image, out imageEnum);
+                                projects.Add(new Project(id, name, enabled, accept, imageEnum, created));
+                            }
                         }
                     }
+                }
+                catch(Exception ex)
+                {
+                    ILoggerFactory factory = new LoggerFactory();
+                    ILogger logger = factory.CreateLogger("Error");
+                    logger.LogError(ex.Message);
                 }
             }
             return projects;
