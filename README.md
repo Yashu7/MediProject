@@ -10,7 +10,7 @@ This is an ASP.NET MVC application that allows users to log in and manage their 
 ## Features
 
 - **User Authentication**: Secure login system to manage user sessions.
-- **Project Management**: Create, view, and update medical research projects.
+- **Project Management**: Create and view medical research projects.
 - **Form Validation**: Ensure all required fields are filled before submission.
 - **Conditional Logic**: Enable or disable form fields based on user input.
 - **Image Type Selection**: Choose supported image types for projects.
